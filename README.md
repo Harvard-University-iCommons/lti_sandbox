@@ -1,12 +1,35 @@
-django-project-template
+LTI Sandbox
 =======================
 
-Use this template to create a new Django project like this:
+This is a sample project that can be used to experiment with building LTI tools.
 
-django-admin.py startproject <project name> --template=https://github.com/User/Project/archive/master.zip
+After you've cloned the repository locally, these are the steps to get up and running:
 
-## Customizations
+### Create a python virtualenv:
 
-* Added top-level `static` and `http_static` directories.  Common assets used across multiple apps (e.g. jQuery, Bootstrap) can be stored in `static`.  For production serving, static assets from both the top-level static directory and all app-level static directories are collected into `http_static`.
-* Added `settings` and `requirements` directories under the project subdirectory.  Inside those directories there are settings and requirements files for each environment: local, test, qa, production. Each of these environment-specific files inherits from a common base file. 
-* Sensitive data in settings (passwords, keys) are expected to be passed to the app via environment variables.  The `settings/base.py` file contains a helper method for retrieving these values from the environment. 
+```
+mkvirtualenv <your env name>
+```
+
+### Install and customize the postactivate and postdeactivate scripts:
+
+These two scripts set and unset certain environment variables for things like database passwords, API keys, etc upon activation or deactivation of the virtualenv.
+
+```
+cp virtualenv_config/post* $VIRTUAL_ENV/bin
+```
+
+Edit $VIRTUAL_ENV/bin/postactivate to set the environment variable values as appropriate.  
+
+### Install the python package dependencies for this project:
+
+```
+pip install -r lti_sandbox/requirements/local.txt
+```
+
+### Run the server:
+
+```
+python manage.py runserver 0.0.0.0 
+```
+
