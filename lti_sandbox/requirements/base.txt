@@ -2,3 +2,4 @@ Django>=1.6
 ims_lti_py
 requests
 git+ssh://git@git.huit.harvard.edu/icommons-python/django-auth-lti.git#egg=django-auth-lti
+cx-Oracle>=5.1.2
