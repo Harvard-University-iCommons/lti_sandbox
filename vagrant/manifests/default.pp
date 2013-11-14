@@ -151,21 +151,21 @@ file {'/opt/oracle':
 exec {'instantclient-basiclite':
     require => [ Download['/tmp/instantclient-basiclite-linux.x64-11.2.0.3.0.zip'], File['/opt/oracle'], Package['unzip'] ],
     cwd => '/opt/oracle',
-    command => 'unzip /vagrant/vagrant/files/instantclient-basiclite-linux.x64-11.2.0.3.0.zip',
+    command => 'unzip /tmp/instantclient-basiclite-linux.x64-11.2.0.3.0.zip',
     creates => '/opt/oracle/instantclient_11_2/BASIC_LITE_README',
 }
 
 exec {'instantclient-sqlplus':
     require => [ Download['/tmp/instantclient-sqlplus-linux.x64-11.2.0.3.0.zip'], File['/opt/oracle'], Package['unzip'] ],
     cwd => '/opt/oracle',
-    command => 'unzip /vagrant/vagrant/files/instantclient-sqlplus-linux.x64-11.2.0.3.0.zip',
+    command => 'unzip /tmp/instantclient-sqlplus-linux.x64-11.2.0.3.0.zip',
     creates => '/opt/oracle/instantclient_11_2/sqlplus',
 }
 
 exec {'instantclient-sdk':
     require => [ Download['/tmp/instantclient-sdk-linux.x64-11.2.0.3.0.zip'], File['/opt/oracle'], Package['unzip'] ],
     cwd => '/opt/oracle',
-    command => 'unzip /vagrant/vagrant/files/instantclient-sdk-linux.x64-11.2.0.3.0.zip',
+    command => 'unzip /tmp/instantclient-sdk-linux.x64-11.2.0.3.0.zip',
     creates => '/opt/oracle/instantclient_11_2/sdk',
 }
 
