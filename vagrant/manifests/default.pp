@@ -63,6 +63,11 @@ package {'curl':
     require => Exec['apt-get-update'],
 }
 
+package {'wget':
+    ensure => latest,
+    require => Exec['apt-get-update'],
+}
+
 package {'libcurl4-openssl-dev':
     ensure => latest,
     require => Exec['apt-get-update'],
@@ -117,7 +122,7 @@ define download ($uri, $timeout = 300) {
           command => "wget -q '$uri' -O $name",
           creates => $name,
           timeout => $timeout,
-          require => Package[ "wget" ],
+          require => Package['wget'],
   }
 }
 
