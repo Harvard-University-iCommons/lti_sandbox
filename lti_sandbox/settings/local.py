@@ -7,6 +7,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
@@ -21,6 +22,8 @@ DATABASES = {
         'CONN_MAX_AGE': None,
     },
 }
+'''
+
 
 INSTALLED_APPS += ('debug_toolbar',)
 MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)

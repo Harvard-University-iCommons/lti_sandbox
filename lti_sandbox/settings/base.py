@@ -141,9 +141,9 @@ TEMPLATE_LOADERS = (
 )
 
 LTI_OAUTH_CREDENTIALS = {
-    'test': 'broken',
+    'test': 'secret',
     'test2': 'reallysecret'
 }
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
