@@ -1,5 +1,6 @@
 # puppet manifest
 
+# Make sure the correct directories are in the path:
 Exec {
     path => [
     '/usr/local/sbin',
@@ -12,6 +13,7 @@ Exec {
     logoutput => true,
 }
 
+# Refresh the catalog of repositories from which packages can be installed:
 exec {'apt-get-update':
     command => 'apt-get update'
 }
@@ -93,7 +95,7 @@ package {'sqlite3':
     require => Exec['apt-get-update'],
 }
 
-# install virtualenv and virtualenvwrapper - depends on pip
+# Install virtualenv and virtualenvwrapper - depends on pip
 
 package {'virtualenv':
     ensure => latest,
@@ -107,6 +109,7 @@ package {'virtualenvwrapper':
     require => [ Package['python-pip'], ],
 }
 
+# make sure that virtualenvwrapper is active
 file {'/etc/profile.d/venvwrapper.sh':
     ensure => file,
     content => 'source `which virtualenvwrapper.sh`',
@@ -114,8 +117,9 @@ file {'/etc/profile.d/venvwrapper.sh':
     require => Package['virtualenvwrapper'],
 }
 
-# install the Oracle instant client
+# Install the Oracle instant client
 
+# This is a helper function to retrieve files from URLs:
 define download ($uri, $timeout = 300) {
   exec {
       "download $uri":
@@ -126,6 +130,7 @@ define download ($uri, $timeout = 300) {
   }
 }
 
+# Using the helper function above, download the Oracle instantclient zip files:
 download {
   "/tmp/instantclient-basiclite-linux.x64-11.2.0.3.0.zip":
       uri => "http://test.isites.harvard.edu/oracle/instantclient-basiclite-linux.x64-11.2.0.3.0.zip",
@@ -144,10 +149,12 @@ download {
       timeout => 900;
 }
 
+# Create the directory where the Oracle instantclient will be installed
 file {'/opt/oracle':
     ensure => directory,
 }
 
+# Unzip the three Oracle zip files that we downloaded earlier:
 exec {'instantclient-basiclite':
     require => [ Download['/tmp/instantclient-basiclite-linux.x64-11.2.0.3.0.zip'], File['/opt/oracle'], Package['unzip'] ],
     cwd => '/opt/oracle',
@@ -169,6 +176,7 @@ exec {'instantclient-sdk':
     creates => '/opt/oracle/instantclient_11_2/sdk',
 }
 
+# Create some symlinks that are missing:
 file {'/opt/oracle/instantclient_11_2/libclntsh.so':
     ensure => link,
     target => 'libclntsh.so.11.1',
@@ -181,6 +189,7 @@ file {'/opt/oracle/instantclient_11_2/libocci.so':
     require => Exec['instantclient-basiclite'],
 }
 
+# Make sure that the ORACLE_HOME, PATH, and LD_LIBRARY_PATH environment variables are set properly:
 file {'/etc/profile.d/oracle.sh':
     ensure => file,
     content => 'export ORACLE_HOME=/opt/oracle/instantclient_11_2; export PATH=$ORACLE_HOME:$PATH; export LD_LIBRARY_PATH=$ORACLE_HOME',
@@ -188,5 +197,10 @@ file {'/etc/profile.d/oracle.sh':
     require => Exec['instantclient-basiclite'],
 }
 
+# Create a symlink from ~/<project_name> to /vagrant as a convenience for the developer
+file {'/home/vagrant/lti_sandbox':
+    ensure => link,
+    target => '/vagrant',
+}
 
 
