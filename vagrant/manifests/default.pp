@@ -203,4 +203,18 @@ file {'/home/vagrant/lti_sandbox':
     target => '/vagrant',
 }
 
+# Create a virtualenv for <project_name>
+exec {'create-virtualenv':
+    user => 'vagrant',
+    require => [ Package['virtualenvwrapper'], File['/home/vagrant/lti_sandbox'] ],
+    command => 'HOME=/home/vagrant source `which virtualenvwrapper.sh`; mkvirtualenv lti_sandbox -a /home/vagrant/lti_sandbox',
+    creates => '/home/vagrant/.virtualenvs/lti_sandbox',
+}
+
+file {'/etc/profile.d/workon.sh':
+    ensure => file,
+    content => 'workon lti_sandbox',
+    mode => '755',
+    require => Exec['create-virtualenv'],
+}
 
