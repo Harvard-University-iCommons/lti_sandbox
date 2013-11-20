@@ -211,10 +211,3 @@ exec {'create-virtualenv':
     creates => '/home/vagrant/.virtualenvs/lti_sandbox',
 }
 
-file {'/etc/profile.d/workon.sh':
-    ensure => file,
-    content => 'workon lti_sandbox',
-    mode => '755',
-    require => Exec['create-virtualenv'],
-}
-
