@@ -211,3 +211,9 @@ exec {'create-virtualenv':
     creates => '/home/vagrant/.virtualenvs/lti_sandbox',
 }
 
+# Active this virtualenv upon login
+file {'/home/vagrant/.bash_profile':
+    user => 'vagrant',
+    content => 'echo "Activating python virtual environment \"lti_sandbox\""; workon lti_sandbox',
+    require => Exec['create-virtualenv'],
+}
