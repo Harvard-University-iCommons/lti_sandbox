@@ -1,6 +1,7 @@
 Django==1.6
 ims_lti_py==0.6
 requests==2.0.1
-git+ssh://git@git.huit.harvard.edu/icommons-python/django-auth-lti.git#egg=django-auth-lti
+#git+ssh://git@git.huit.harvard.edu/icommons-python/django-auth-lti.git#egg=django-auth-lti
+git+https://github.com/Harvard-University-iCommons/django-auth-lti.git#egg=django-auth-lti
 #cx-Oracle>=5.1.2
 #git+ssh://git@git.huit.harvard.edu/icommons-python/django-icommons-common.git@release_0.4#egg=django-icommons-common
