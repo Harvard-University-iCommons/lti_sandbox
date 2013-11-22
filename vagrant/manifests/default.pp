@@ -205,11 +205,13 @@ file {'/home/vagrant/lti_sandbox':
 
 # Create a virtualenv for <project_name>
 exec {'create-virtualenv':
+    provider => 'shell',
     user => 'vagrant',
-    require => [ Package['virtualenvwrapper'], File['/home/vagrant/lti_sandbox'] ],
-    command => 'HOME=/home/vagrant source `which virtualenvwrapper.sh`; mkvirtualenv lti_sandbox -a /home/vagrant/lti_sandbox',
+    group => 'vagrant',
+    require => [ Package['virtualenvwrapper'], File['/home/vagrant/lti_sandbox'], File['/etc/profile.d/oracle.sh'] ],
+    environment => ["HOME=/home/vagrant","WORKON_HOME=/home/vagrant/.virtualenvs"],
+    command => '/vagrant/vagrant/venv_bootstrap.sh',
     creates => '/home/vagrant/.virtualenvs/lti_sandbox',
-}
 
 # Active this virtualenv upon login
 file {'/home/vagrant/.bash_profile':
