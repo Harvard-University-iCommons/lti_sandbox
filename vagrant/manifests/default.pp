@@ -95,13 +95,6 @@ package {'sqlite3':
     require => Exec['apt-get-update'],
 }
 
-# set up ssh known hosts
-file {'/home/vagrant/.ssh/known_hosts':
-    ensure => file,
-    content => '/vagrant/vagrant/known_hosts',
-    mode => '644'
-}
-
 # Install virtualenv and virtualenvwrapper - depends on pip
 
 package {'virtualenv':
@@ -215,7 +208,7 @@ exec {'create-virtualenv':
     provider => 'shell',
     user => 'vagrant',
     group => 'vagrant',
-    require => [ Package['virtualenvwrapper'], File['/home/vagrant/lti_sandbox'], File['/home/vagrant/.ssh/known_hosts'], ],
+    require => [ Package['virtualenvwrapper'], File['/home/vagrant/lti_sandbox'], ],
     environment => ["HOME=/home/vagrant","WORKON_HOME=/home/vagrant/.virtualenvs"],
     command => '/vagrant/vagrant/venv_bootstrap.sh',
     creates => '/home/vagrant/.virtualenvs/lti_sandbox',
