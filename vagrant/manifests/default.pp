@@ -208,7 +208,7 @@ exec {'create-virtualenv':
     provider => 'shell',
     user => 'vagrant',
     group => 'vagrant',
-    require => [ Package['virtualenvwrapper'], File['/home/vagrant/lti_sandbox'], File['/etc/profile.d/oracle.sh'] ],
+    require => [ Package['virtualenvwrapper'], File['/home/vagrant/lti_sandbox'], ],
     environment => ["HOME=/home/vagrant","WORKON_HOME=/home/vagrant/.virtualenvs"],
     command => '/vagrant/vagrant/venv_bootstrap.sh',
     creates => '/home/vagrant/.virtualenvs/lti_sandbox',
