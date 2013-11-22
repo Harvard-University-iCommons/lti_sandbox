@@ -212,6 +212,7 @@ exec {'create-virtualenv':
     environment => ["HOME=/home/vagrant","WORKON_HOME=/home/vagrant/.virtualenvs"],
     command => '/vagrant/vagrant/venv_bootstrap.sh',
     creates => '/home/vagrant/.virtualenvs/lti_sandbox',
+}
 
 # Active this virtualenv upon login
 file {'/home/vagrant/.bash_profile':
