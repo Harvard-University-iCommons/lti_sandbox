@@ -27,6 +27,12 @@ Edit $VIRTUAL_ENV/bin/postactivate to set the environment variable values as app
 pip install -r lti_sandbox/requirements/local.txt
 ```
 
+### Set up the sqlite database:
+
+```
+./manage.py syncdb
+```
+
 ### Run the server:
 
 ```
