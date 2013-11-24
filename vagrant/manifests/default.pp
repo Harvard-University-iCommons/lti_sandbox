@@ -217,6 +217,6 @@ exec {'create-virtualenv':
 # Active this virtualenv upon login
 file {'/home/vagrant/.bash_profile':
     owner => 'vagrant',
-    content => 'echo "Activating python virtual environment \"lti_sandbox\""; workon lti_sandbox',
+    content => 'echo "Activating python virtual environment \"lti_sandbox\""; workon lti_sandbox; export DJANGO_CONFIG_MODULE=lti_sandbox.settings.local',
     require => Exec['create-virtualenv'],
 }
