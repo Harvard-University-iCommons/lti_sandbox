@@ -5,27 +5,21 @@ This is a sample project that can be used to experiment with building LTI tools.
 
 After you've cloned the repository locally, these are the steps to get up and running:
 
-### Create a python virtualenv:
+### Start the virtual machine with Vagrant:
 
 ```
-mkvirtualenv <your env name>
+vagrant up
 ```
 
-### Install and customize the postactivate and postdeactivate scripts:
+Vagrant will create an Ubuntu virtual machine and provision it with everything you will need to run the sandbox application.  This includes creating a new Python virtualenv using the `mkvirtualenv` command, and installing the project's Python dependencies using `pip`.
 
-These two scripts set and unset certain environment variables for things like database passwords, API keys, etc upon activation or deactivation of the virtualenv.
-
-```
-cp virtualenv_config/post* $VIRTUAL_ENV/bin
-```
-
-Edit $VIRTUAL_ENV/bin/postactivate to set the environment variable values as appropriate.  
-
-### Install the python package dependencies for this project:
+When the startup process has completed, log in to your new machine:
 
 ```
-pip install -r lti_sandbox/requirements/local.txt
+vagrant ssh
 ```
+
+The Python virtualenv that was created during the provisioning step, `lti_sandbox`, will already be activated, and you'll be moved into the project directory.
 
 ### Set up the sqlite database:
 
@@ -36,6 +30,6 @@ pip install -r lti_sandbox/requirements/local.txt
 ### Run the server:
 
 ```
-python manage.py runserver 0.0.0.0 
+python manage.py runserver 0.0.0.0:8000 
 ```
 

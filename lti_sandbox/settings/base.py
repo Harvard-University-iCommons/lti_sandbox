@@ -53,7 +53,11 @@ path.append(SITE_ROOT)
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_env_variable('DJANGO_SECRET_KEY')
+try:
+    SECRET_KEY = get_env_variable('DJANGO_SECRET_KEY')
+except ImproperlyConfigured:
+    print "!!! WARNING: you have not set the DJANGO_SECRET_KEY environment varialbe.  Proceeding with a default key, but this is not secure !!!"
+    SECRET_KEY = 'this-is-a-default-secret-key'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
