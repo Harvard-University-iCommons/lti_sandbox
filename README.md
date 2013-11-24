@@ -21,11 +21,6 @@ vagrant ssh
 
 The Python virtualenv that was created during the provisioning step, `lti_sandbox`, will already be activated, and you'll be moved into the project directory.
 
-### Set up the sqlite database:
-
-```
-./manage.py syncdb
-```
 
 ### Run the server:
 
