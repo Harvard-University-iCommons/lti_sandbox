@@ -14,7 +14,7 @@ Exec {
 }
 
 # Use the Ubuntu repositories hosted at Amazon - they're faster
-file {'/etc/apt/sources.list.d/ubuntu_aws.list':
+file {'/etc/apt/sources.list':
     ensure => file,
     source => '/vagrant/vagrant/ubuntu_aws.list',
 }
@@ -22,7 +22,7 @@ file {'/etc/apt/sources.list.d/ubuntu_aws.list':
 # Refresh the catalog of repositories from which packages can be installed:
 exec {'apt-get-update':
     command => 'apt-get update',
-    require => File['/etc/apt/sources.list.d/ubuntu_aws.list'],
+    require => File['/etc/apt/sources.list'],
 }
 
 # make sure we have some basic tools and libraries available
