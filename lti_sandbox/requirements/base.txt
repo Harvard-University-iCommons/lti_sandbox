@@ -2,3 +2,4 @@ Django==1.6
 ims_lti_py==0.6
 requests==2.0.1
 git+https://github.com/Harvard-University-iCommons/django-auth-lti.git#egg=django-auth-lti
+
