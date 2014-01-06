@@ -7,23 +7,6 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-'''
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'isitedev',
-        'USER': 'termtool',
-        'PASSWORD': get_env_variable('DJANGO_DB_PASSWORD'),
-        'HOST': 'icd3.isites.harvard.edu',
-        'PORT': '8103',
-        'OPTIONS': {
-            'threaded': True,
-        },
-        'CONN_MAX_AGE': None,
-    },
-}
-'''
-
 
 INSTALLED_APPS += ('debug_toolbar',)
 MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)

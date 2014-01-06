@@ -46,6 +46,18 @@ def tool_config(request):
         launch_url=url,
         secure_launch_url=secure_url,
     )
+    # this is how to tell Canvas that this tool provides a course navigation link:
+    course_nav_params = {
+        'enabled': 'true',
+        'default': 'enabled',
+        'visibility': 'members',  # all enrollees can see it; other values: public, admins
+        # optionally, supply a different URL for the link:
+        # 'url': 'http://library.harvard.edu',
+        'text': 'Simple Tool',
+    }
+    lti_tool_config.set_ext_param('canvas.instructure.com', 'course_navigation', course_nav_params)
+
     lti_tool_config.description = 'This is a simple LTI tool.'
+
     resp = HttpResponse(lti_tool_config.to_xml(), content_type='text/xml', status=200)
     return resp
