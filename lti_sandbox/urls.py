@@ -12,4 +12,6 @@ urlpatterns = patterns('',
 
     url(r'^simpletool/', include('simpletool.urls', namespace="st")),
 
+    url(r'^error/', 'lti_sandbox.views.error', name='error'),
+
 )

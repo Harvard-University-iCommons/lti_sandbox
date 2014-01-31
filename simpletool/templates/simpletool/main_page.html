@@ -13,7 +13,7 @@
     For example, the parameters include the user's full name, in this case it knows that your name is {{ request.POST.lis_person_name_full }}.  We can also tell that this request is for a course called "{{ request.POST.context_title }}", which has a unique identifier of {{ request.POST.lis_course_offering_sourcedid }}.  The name of this particular resource within the course site is "{{ request.POST.resource_link_title}}".
 </p>
 <p>
-    <a href="another_page">Link to another page in this tool</a>
+    <a href="{% url 'st:another_page' %}">Link to another page in this tool</a>
 </p>
 <p>
     Below is a full report of all of the POST parameters that were included in this request.  Note that these LTI parameters will only appear in the initial launch request; if your tool needs these values later on, you should persist them in the session, database, or other storage. 

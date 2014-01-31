@@ -1,12 +1,24 @@
 <html>
 <head>
 <title>Another test page</title>
+<style>
+    td {
+        border-bottom: 1px lightgray solid;
+        padding: 5px;
+    }
+</style>
 </head>
 <body>
 
-<h3>Another test page.</h3>
+<h3>Another page.</h3>
 
-<a href="lti_tool">Back to the main lti_tool view</a>
+<a href="{% url 'st:main_page' %}">Back to the main view</a>
 
+<h4>LTI Launch parameters for this session:</h4>
+<table>
+{% for k,v in lti_launch.iteritems %}
+<tr><td><b>{{ k }}</b></td><td>{{ v }}</td></tr>
+{% endfor %}
+</table>
 </body>
 </html>

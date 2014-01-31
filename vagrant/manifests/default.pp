@@ -27,6 +27,11 @@ exec {'apt-get-update':
 
 # make sure we have some basic tools and libraries available
 
+package {'redis-server':
+    ensure => latest,
+    require => Exec['apt-get-update'],
+}
+
 package {'libxslt1-dev':
     ensure => latest,
     require => Exec['apt-get-update'],

@@ -3,3 +3,10 @@ ims_lti_py==0.6
 requests==2.0.1
 git+https://github.com/Harvard-University-iCommons/django-auth-lti.git#egg=django-auth-lti
 
+# redis cache
+redis==2.9.0
+django-redis-cache==0.10.2
+hiredis==0.1.2
+django-redis-sessions==0.4.0
+
+django-cached-authentication-middleware>=0.2.0

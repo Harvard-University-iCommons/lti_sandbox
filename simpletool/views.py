@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.http import require_http_methods
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -19,32 +19,44 @@ def index(request):
     return render(request, 'simpletool/index.html')
 
 
-@login_required
+@login_required(login_url='error')
 @require_http_methods(['POST'])
-def lti_tool(request):
+def lti_launch(request):
 
     if request.user.is_authenticated:
-        return render(request, 'simpletool/lti_tool.html', {'request': request})
+        return redirect('st:main_page')
 
     else:
-        return render(request, 'simpletool/error.html', {'message': 'Error: user is not authenticated!'})
+        return redirect('error')
 
 
+@login_required(login_url='error')
+@require_http_methods(['GET'])
+def main_page(request):
+        return render(request, 'simpletool/main_page.html', {'request': request})
+
+
+@login_required(login_url='error')
+@require_http_methods(['GET'])
 def another_page(request):
-    return render(request, 'simpletool/another_page.html')
+
+    lti_launch = request.session.get('LTI_LAUNCH', None)
+    return render(request, 'simpletool/another_page.html', {'lti_launch': lti_launch})
 
 
 @require_http_methods(['GET'])
 def tool_config(request):
-    host = 'http://' + request.get_host()
-    secure_host = 'https://' + request.get_host()
-    url = host + reverse('st:lti_tool')
-    secure_url = secure_host + reverse('st:lti_tool')
+    if request.is_secure():
+        host = 'https://' + request.get_host()
+    else:
+        host = 'http://' + request.get_host()
+
+    url = host + reverse('st:lti_launch')
 
     lti_tool_config = ToolConfig(
         title='LTI Sandbox Simple Tool',
         launch_url=url,
-        secure_launch_url=secure_url,
+        secure_launch_url=url,
     )
     # this is how to tell Canvas that this tool provides a course navigation link:
     course_nav_params = {
